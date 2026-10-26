@@ -22,42 +22,39 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 - Payments tracked for memberships and sessions.
 
 ### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+<img width="862" height="662" alt="image" src="https://github.com/user-attachments/assets/9a747c6b-a383-44f2-ae13-e36f96341d0e" />
+
 
 ### Entities and Attributes
 
 | Entity | Attributes (PK, FK) | Notes |
 |--------|--------------------|-------|
-| Member | PK: Member_ID, Name, Membership_Type, Start_Date | Stores member details |
-| Program | PK: Program_ID, Program_Name, Description | Stores fitness programs |
-| Trainer | PK: Trainer_ID, Name, Specialization | Stores trainer details |
-| Enrollment | PK, FK: Member_ID; PK, FK: Program_ID; Enrollment_Date | Connects members and programs |
-| Program_Trainer | PK, FK: Program_ID; PK, FK: Trainer_ID | Connects trainers and programs |
-| Session | PK: Session_ID, FK: Member_ID, FK: Trainer_ID, Session_Date, Session_Time | Stores personal training bookings |
-| Attendance | PK: Attendance_ID, FK: Session_ID, Status | Records session attendance |
-| Payment | PK: Payment_ID, FK: Member_ID, Amount, Payment_Date, Payment_Type | Tracks membership and session payments |
+| Trainer | PK: trainer_id, name, specialization, phone_no | Stores trainer details |
+| Program | PK: program_id, name, category | Stores fitness program details |
+| Member | PK: member_id, name, email, member_type | Stores gym member details |
+| Session | PK: session_id, FK: trainer_id, FK: member_id, session_type, session_time | Stores personal training session details |
+| Payment | PK: payment_id, FK: member_id, payment_type | Stores membership and session payments |
+| Attendance | PK: attendance_id, FK: session_id, status, date | Records attendance for sessions |
 
 ### Relationships and Constraints
 
 | Relationship | Cardinality | Participation | Notes |
 |--------------|-------------|---------------|-------|
-| Member - Enrollment | 1 : M | Enrollment is total | A member can enroll in multiple programs |
-| Program - Enrollment | 1 : M | Enrollment is total | A program can have many members |
-| Program - Trainer | M : N | Partial on both sides | A program can have multiple trainers |
-| Member - Session | 1 : M | Session is total | A member can book multiple sessions |
-| Trainer - Session | 1 : M | Session is total | A trainer can conduct multiple sessions |
-| Session - Attendance | 1 : 0..1 | Attendance is optional | Attendance may be recorded after the session |
-| Member - Payment | 1 : M | Payment is total | A member can make multiple payments |
+| Trainer - Program (teaches) | M : N | Partial on both sides | A trainer can teach multiple programs, and a program can have multiple trainers |
+| Member - Program (joins) | M : N | Partial on both sides | A member can join multiple programs, and a program can have multiple members |
+| Member - Session (books) | 1 : M | Session is total | A member can book multiple training sessions |
+| Trainer - Session (handles) | 1 : M | Session is total | A trainer can handle multiple sessions |
+| Member - Payment (makes) | 1 : M | Payment is total | A member can make multiple payments |
+| Session - Attendance (records) | 1 : 0..1 | Attendance is optional | Attendance is recorded for a session when applicable |
 
 ### Assumptions
 
-- Each member has a unique Member_ID and one current membership type.
-- Members can enroll in multiple programs, and each program can have multiple members.
-- Trainers can be assigned to multiple programs, and each program can have multiple trainers.
-- Each personal training session is booked by one member and assigned to one trainer.
-- Attendance is recorded for each completed session.
-- Payments are linked to a member and classified as membership or personal training session payments.
+- Each trainer, program, member, session, payment, and attendance record has a unique ID.
+- A trainer can teach multiple programs, and each program can be taught by multiple trainers.
+- A member can join multiple programs and book multiple personal training sessions.
+- Each session is booked by one member and handled by one trainer.
+- Payments are made by members for memberships or personal training sessions.
+- Attendance records store the session date and status, such as Present or Absent.
 
 ---
 
