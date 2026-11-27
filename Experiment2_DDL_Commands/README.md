@@ -105,22 +105,34 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+<img width="1183" height="502" alt="image" src="https://github.com/user-attachments/assets/5d365dfb-64f8-4730-824e-e07484675bba" />
+
+-- 
 
 ```sql
--- Paste your SQL code below for Question 1
+ALTER TABLE Companies RENAME COLUMN name TO first_name;
+ALTER TABLE Companies ADD COLUMN mobilenumber number;
+ALTER TABLE Companies ADD COLUMN DOB Date;
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="697" height="285" alt="image" src="https://github.com/user-attachments/assets/2b1be163-42fb-4d9a-a24f-9d7d4af67aa2" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+<img width="1225" height="392" alt="image" src="https://github.com/user-attachments/assets/ccafef92-4185-4f9f-8bc9-177580421a8d" />
+
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE contacts(
+    contact_id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT,
+    phone TEXT NOT NULL CHECK (LENGTH(phone) >= 10)
+);
 ```
 
 **Output:**
